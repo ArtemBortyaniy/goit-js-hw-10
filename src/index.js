@@ -12,7 +12,7 @@ const DEBOUNCE_DELAY = 300;
 countrySeach.addEventListener('input', debounce(getApiCountry, DEBOUNCE_DELAY));
 
 function getApiCountry (event){
-    fetchCountriesApi.countries = event.target.value;
+    fetchCountriesApi.country = event.target.value;
 
     clearList();
 
@@ -35,10 +35,10 @@ function getApiCountry (event){
 
 
 function generateMarkapCountries (countries) {
-    return[...countries].map((countries) => {
+    return[...countries].map(({flags: {svg}, name : {common}}) => {
         return `<li class="country-label">
-            <img src='${countries.flags.svg}' class="country-flag">
-            <p>${countries.name.common}</p>
+            <img src='${svg}' class="country-flag">
+            <p>${common}</p>
             </li>`
     }).join('');
 }
