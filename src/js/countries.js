@@ -46,7 +46,7 @@ function generateMarkapCountries (countries) {
 }
 
 function generateMarkapIngoCountry (country){
-    return [...country].map(() => {
+    return [...country].map(({name : {common}, flags : {svg}, capital, population, languages}) => {
         return `
         <p class="country-label">
         <img src='${svg}' class="country-flag">${common}</p>
