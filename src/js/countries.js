@@ -57,7 +57,7 @@ function generateMarkapIngoCountry (country){
     });
 }
 
-function printResult () {
-    refs.countryListEl.innerHTML = '';
-    refs.countryInfoEl.innerHTML = '';
+function printResult (countryList = '', countryInfo = '') {
+    refs.countryListEl.innerHTML = countryList;
+    refs.countryInfoEl.innerHTML = countryInfo;
 }
