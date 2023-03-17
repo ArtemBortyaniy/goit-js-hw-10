@@ -33,7 +33,7 @@ function getApiCountry (event){
             printResult();
             refs.countryInfoEl.insertAdjacentHTML('beforeend', generateMarkapIngoCountry(countryData));
         }
-    });
+    }).catch(error => console.log(`error ${error}`));
 }
 
 function generateMarkapCountries (countries) {
@@ -46,7 +46,7 @@ function generateMarkapCountries (countries) {
 }
 
 function generateMarkapIngoCountry (country){
-    return [...country].map(({name : {common}, flags : {svg}, capital, population, languages}) => {
+    return [...country].map(() => {
         return `
         <p class="country-label">
         <img src='${svg}' class="country-flag">${common}</p>
