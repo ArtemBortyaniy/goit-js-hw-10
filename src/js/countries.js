@@ -26,13 +26,14 @@ function getApiCountry (event){
         }
         if(countryData.length >= 2 && countryData.length <= 10) {
             printResult();
+            console.log(countryData);
             refs.countryListEl.insertAdjacentHTML('beforeend', generateMarkapCountries(countryData));
         }
         if(countryData.length === 1) {
             printResult();
             refs.countryInfoEl.insertAdjacentHTML('beforeend', generateMarkapIngoCountry(countryData));
         }
-    }).catch(error => console.log(`${error}, error`));
+    });
 }
 
 function generateMarkapCountries (countries) {
@@ -45,24 +46,18 @@ function generateMarkapCountries (countries) {
 }
 
 function generateMarkapIngoCountry (country){
-    const {
-        name : {common}, 
-        flags: {svg}, 
-        capital, 
-        population,
-        languages : {deu}
-    } = country
-    
-    return `
+    return [...country].map(({name : {common}, flags : {svg}, capital, population, languages}) => {
+        return `
         <p class="country-label">
         <img src='${svg}' class="country-flag">${common}</p>
         <p><b>Capital: </b>${capital}</p>
         <p><b>Population: </b>${population}</p>
-        <p><b>Languages: </b>${deu}</p>
+        <p><b>Languages: </b>${Object.values(languages)}</p>
         `;
+    });
 }
 
-function printResult (countryListEl = '', countryInfo = '') {
-    refs.countryListEl.innerHTML = countryListEl;
-    refs.countryInfo.innerHTML = countryInfo;
+function printResult () {
+    refs.countryListEl.innerHTML = '';
+    refs.countryInfoEl.innerHTML = '';
 }
