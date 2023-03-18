@@ -33,7 +33,10 @@ function getApiCountry (event){
             printResult();
             refs.countryInfoEl.insertAdjacentHTML('beforeend', generateMarkapIngoCountry(countryData));
         }
-    }).catch(error => console.log(`error ${error}`));
+    }).catch(error => {
+        printResult();
+        Notiflix.Notify.failure("Oops, there is no country with that name");
+    });
 }
 
 function generateMarkapCountries (countries) {
@@ -46,7 +49,13 @@ function generateMarkapCountries (countries) {
 }
 
 function generateMarkapIngoCountry (country){
-    return [...country].map(({name : {common}, flags : {svg}, capital, population, languages}) => {
+    const {
+        name : {common}, 
+        flags : {svg}, 
+        capital,
+        population,
+        languages} = country;
+        
         return `
         <p class="country-label">
         <img src='${svg}' class="country-flag">${common}</p>
@@ -54,7 +63,6 @@ function generateMarkapIngoCountry (country){
         <p><b>Population: </b>${population}</p>
         <p><b>Languages: </b>${Object.values(languages)}</p>
         `;
-    });
 }
 
 function printResult (countryList = '', countryInfo = '') {
