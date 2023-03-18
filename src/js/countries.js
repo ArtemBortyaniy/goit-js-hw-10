@@ -26,17 +26,13 @@ function getApiCountry (event){
         }
         if(countryData.length >= 2 && countryData.length <= 10) {
             printResult();
-            console.log(countryData);
             refs.countryListEl.insertAdjacentHTML('beforeend', generateMarkapCountries(countryData));
         }
         if(countryData.length === 1) {
             printResult();
             refs.countryInfoEl.insertAdjacentHTML('beforeend', generateMarkapIngoCountry(countryData));
         }
-    }).catch(error => {
-        printResult();
-        Notiflix.Notify.failure("Oops, there is no country with that name");
-    });
+    }).catch(error => Notiflix.Notify.failure("Oops, there is no country with that name"));
 }
 
 function generateMarkapCountries (countries) {
