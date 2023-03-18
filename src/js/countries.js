@@ -30,13 +30,13 @@ function getApiCountry (event){
         }
         if(countryData.length === 1) {
             printResult();
-            refs.countryInfoEl.insertAdjacentHTML('beforeend', generateMarkapIngoCountry(countryData));
+            refs.countryInfoEl.insertAdjacentHTML('beforeend', generateMarkapIngoCountry(countryData[0]));
         }
     }).catch(error => Notiflix.Notify.failure("Oops, there is no country with that name"));
 }
 
 function generateMarkapCountries (countries) {
-    return[...countries].map(({flags: {svg}, name : {common}}) => {
+    return [...countries].map(({flags: {svg}, name : {common}}) => {
         return `<li class="country-label">
             <img src='${svg}' class="country-flag">
             <p>${common}</p>
